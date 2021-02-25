@@ -1,7 +1,8 @@
 # WiFi-channel-finder
 Finds the best channel for your 2.4GHz WiFi
 
-#![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/USBGuard/usbguard?style=plastic) 
+#![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/USBGuard/usbguard?style=plastic)
+
 ![GitHub last commit](https://img.shields.io/github/last-commit/thomasgruebl/WiFi-channel-finder?style=plastic) ![GitHub](https://img.shields.io/github/license/thomasgruebl/WiFi-channel-finder?style=plastic)
 
 **Dependencies**
