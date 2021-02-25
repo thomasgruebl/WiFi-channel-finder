@@ -10,23 +10,24 @@ echo "Your SSID: $ssid"
 
 # detect surrounding SSIDs, channels in use and signal strengths
 scan_networks() {
-	all_ssids=$(iwlist $interface scan | grep -oP '(?<=ESSID:).*' | tr -d '"')
-	all_ssids=($all_ssids)
+	iwlist_out=$(iwlist $interface scan)
 
-	channels=$(iwlist $interface scan | grep -oP '(?<=Channel:).*')
+	IFS_backup=$IFS
+	IFS=$'\n'
+	all_ssids=$(echo "$iwlist_out" | grep 'ESSID:' | cut -d '"' -f2)
+	all_ssids=($all_ssids)
+	IFS=$IFS_backup
+
+	channels=$(echo "$iwlist_out" | grep -oP '(?<=Channel:).*')
 	channels=($channels)
 
-	quality_weights=$(iwlist $interface scan | grep -oP '(?<=Quality=).*' | cut -c1-2)
+	quality_weights=$(echo "$iwlist_out" | grep -oP '(?<=Quality=).*' | cut -c1-2)
 	quality_weights=($quality_weights)
 }
 scan_networks
-while [ ${#all_ssids[@]} != ${#channels[@]} ]; do
-	scan_networks
-	echo "${#all_ssids[@]} ${#channels[@]}"
-done
 
 echo "Neighbouring networks found: "
-for i in "${!all_ssids[@]}"
+for i in "${!channels[@]}"
 do
 	echo "${all_ssids[$i]} ${channels[$i]} ${quality_weights[$i]}"
 done
