@@ -123,7 +123,7 @@ compute_recommendation() {
 }
 
 #  call functions multiple times to update the channels and then recalculate weigths
-#for xxxxxxxxxxxxxxxxxxx  put in for loop
+#for
 scan_networks
 ignore_own_network
 compute_recommendation "$max_channels"
