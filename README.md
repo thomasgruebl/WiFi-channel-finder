@@ -1,7 +1,7 @@
 # WiFi-channel-finder
 Finds the best channel for your 2.4GHz WiFi
 
-#![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/USBGuard/usbguard?style=plastic)
+**UNFINISHED**
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/thomasgruebl/WiFi-channel-finder?style=plastic) ![GitHub](https://img.shields.io/github/license/thomasgruebl/WiFi-channel-finder?style=plastic)
 
@@ -37,11 +37,5 @@ Since many routers enforce the auto-select channel option by default, it often h
 5GHz WiFi, on the other hand, provides 24 non-overlapping channels which significantly reduces the likelihood
 of interferences (unless you all happen to have the same router model with the same default settings).
 
-Living in a new flat I quickly found myself struggling with a pretty bad WiFi connection and 
-
-You need access to the router admin panel to change 
-
-
-**Background**
----
+You need access to your router admin panel to change the channel.
 
