@@ -6,6 +6,7 @@ echo "Your WiFi interface: $interface"
 
 # get SSID of your wifi
 ssid=$(iwgetid -r)
+ssid=\"${ssid}\"
 echo "Your SSID: $ssid"
 
 case "$1" in
@@ -31,7 +32,9 @@ scan_networks() {
 
 	# reset Internal Field Separator (IFS) temporarily to allow SSIDs containing white spaces
 	IFS=$'\n'
-	all_ssids=$(echo "$iwlist_out" | grep 'ESSID:' | cut -d '"' -f2)
+	#all_ssids=$(echo "$iwlist_out" | grep 'ESSID:' | cut -d '"' -f2)
+	#all_ssids=$(echo "$iwlist_out" | grep -o 'ESSID:"[^"]\+"')
+	all_ssids=$(echo "$iwlist_out" | grep -oP '(?<=ESSID:).*')
 	all_ssids=($all_ssids)
 	unset IFS
 
@@ -91,7 +94,7 @@ compute_recommendation() {
 	# based on number of networks and signal strengths
 	for i in "${!counts[@]}"
 	do
-		if [[ " ${!best_channels[*]} " =~ "${i}" ]]; then
+		if [[ "${!best_channels[*]}" =~ "${i}" ]]; then
 			best_channels[${i}]=${counts[$i]}
 			
 		fi
@@ -100,13 +103,16 @@ compute_recommendation() {
 	echo "Best channel keys ${!best_channels[*]}"
 	echo "Best channel values ${best_channels[@]}"
 	
-	lowest_occupancy=1000
-	rec=0
+	lowest_occupancy=9999
+	rec=()
 	for i in "${!best_channels[@]}"
 	do
-		if (("${best_channels[$i]}" < "$lowest_occupancy")); then
+		if (( "${best_channels[$i]}" < "$lowest_occupancy" )); then
 			lowest_occupancy=${best_channels[$i]}
-			rec=$i
+			unset rec
+			rec+=($i)
+		elif (( "${best_channels[$i]}" == "$lowest_occupancy" )); then
+			rec+=($i)
 		fi
 	done
 	
@@ -142,7 +148,7 @@ do
 	echo "${all_ssids[$i]}; ${channels[$i]}; ${quality_weights[$i]}"
 done
 
-echo -e "\n\nRecommended channel(s): $rec"
+echo -e "\n\nRecommended channel(s): ${rec[@]}"
 
 
 
