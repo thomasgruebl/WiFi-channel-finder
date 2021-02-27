@@ -20,8 +20,7 @@ iwgetid
 Usage: sudo ./channel_finder.sh [OPTIONS]
 
 Arguments:
-  [1]  --two
-  [2]  --five
+  [1]  --ssid    Optionally specify a different SSID to scan
 ```
 
 **Description**
