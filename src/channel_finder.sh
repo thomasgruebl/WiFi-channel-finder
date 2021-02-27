@@ -10,21 +10,17 @@ ssid=\"${ssid}\"
 echo "Your SSID: $ssid"
 
 case "$1" in
-	--two)
-		max_channel=14
-		min_channel=1
+
+	--ssid)
+		ssid=${@:2}
+		ssid=\"${ssid}\"
 		;;
 		
-	--five)
-		max_channel=196
-		min_channel=32
-		;;
-
 	*)
-		max_channel=14
-		min_channel=1
 		;;
 esac
+
+echo "Scanning SSID: $ssid"
 
 # detect surrounding SSIDs, channels in use and signal strengths
 scan_networks() {
@@ -71,6 +67,8 @@ compute_recommendation() {
 	declare -A best_channels=([1]=0 [6]=0 [11]=0)
 	echo "Best channels ${!best_channels[*]} ${best_channels[@]}"
 	max_quality=70
+	max_channel=14
+	min_channel=1
 	
 	for i in "${!all_ssids[@]}"
 	do
@@ -132,12 +130,12 @@ compute_recommendation() {
 #for
 scan_networks
 ignore_own_network
-compute_recommendation "$max_channels"
+compute_recommendation
 while ! [ "${#all_ssids[@]}" -eq "${#channels[@]}" ]
 do
 	scan_networks
 	ignore_own_network
-	compute_recommendation "$max_channels"
+	compute_recommendation
 done
 #done
 
