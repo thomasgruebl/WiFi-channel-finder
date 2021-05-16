@@ -17,6 +17,7 @@ iwgetid
 ---
 
 ```
+Make executable: chmod +x channel_finder.sh
 Usage: sudo ./channel_finder.sh [OPTIONS]
 
 Arguments:
