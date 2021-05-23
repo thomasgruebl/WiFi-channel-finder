@@ -1,8 +1,6 @@
 # WiFi-channel-finder
 Finds the best channel for your 2.4GHz WiFi
 
-**UNFINISHED**
-
 ![GitHub last commit](https://img.shields.io/github/last-commit/thomasgruebl/WiFi-channel-finder?style=plastic) ![GitHub](https://img.shields.io/github/license/thomasgruebl/WiFi-channel-finder?style=plastic)
 
 **Dependencies**
